@@ -1,47 +1,146 @@
-ATM management systems are software solutions designed to manage, monitor, and maintain automated teller machines (ATMs). These systems help financial institutions and ATM operators to:
+# ATM Management System
 
-Key Functions
-1. Monitor ATM Status: Real-time monitoring of ATM status, including cash levels, transaction activity, and technical issues.
-2. Manage Cash: Automated cash replenishment, cash forecasting, and cash optimization.
-3. Track Transactions: Tracking and analysis of ATM transactions, including withdrawals, deposits, and balance inquiries.
-4. Implement Security: Implementation of security measures, such as encryption, access controls, and fraud detection.
-5. Generate Reports: Generation of reports and analytics on ATM performance, transaction trends, and customer behavior.
+A Java-based ATM Management System with a modern graphical user interface and secure banking operations.
 
-Benefits
-1. Increased Efficiency: Automation of ATM management tasks, reducing manual effort and increasing productivity.
-2. Improved Security: Enhanced security measures to protect customer data and prevent fraud.
-3. Better Customer Experience: Improved ATM uptime and availability, reducing customer inconvenience and frustration.
-4. Data-Driven Insights: Data-driven insights on ATM performance and customer behavior, enabling informed decision-making.
-5. Cost Savings: Reduced costs associated with ATM maintenance, cash management, and security.
+## Features
 
-Features
-1. Real-time Monitoring: Real-time monitoring of ATM status and transactions.
-2. Automated Alerts: Automated alerts for technical issues, cash replenishment, and security breaches.
-3. Cash Forecasting: Cash forecasting and optimization to minimize cash shortages and excess cash.
-4. Security Features: Advanced security features, such as encryption, access controls, and fraud detection.
-5. Reporting and Analytics: Generation of reports and analytics on ATM performance and customer behavior.
+- 🔐 Enhanced security:
+  - Secure user authentication with SHA-256 PIN hashing
+  - Account lockout after multiple failed attempts
+  - Security question verification for PIN reset
+  - Strong PIN requirements and validation
+- 💰 Basic banking operations:
+  - Cash deposit
+  - Cash withdrawal
+  - Balance inquiry
+  - PIN change
+  - Mini statement
+  - Fast cash options
+- 📝 Improved account registration:
+  - Comprehensive user information collection
+  - Copiable credentials for new users
+  - Security question setup during registration
+- 🎨 Modern UI with responsive design:
+  - Professional button styling with hover effects
+  - Centered layout for better user experience
+  - Clear visual feedback for user actions
+- 🔒 Enhanced security infrastructure:
+  - Account locking system
+  - Failed attempts tracking
+  - Proper PIN reset verification flow
+  - Protection against sequential and repetitive PINs
 
-Importance
-1. Customer Satisfaction: ATM management systems help ensure that ATMs are available and functioning properly, improving customer satisfaction.
-2. Security: ATM management systems help prevent security breaches and protect customer data.
-3. Efficiency: ATM management systems automate many tasks, reducing manual effort and increasing productivity.
-4. Cost Savings: ATM management systems help reduce costs associated with ATM maintenance, cash management, and security.
+## Technologies Used
 
-Overall, ATM management systems are essential for financial institutions and ATM operators to ensure efficient, secure, and customer-friendly ATM services.
+- Java Swing for GUI
+- JDBC for database connectivity
+- MySQL for data storage
+- SHA-256 for PIN hashing
+- Custom security infrastructure
 
-The first ATM in India was installed in 1987 by the Hongkong and Shanghai Banking Corporation (HSBC) in Mumbai. In the following decade, about 1,500 ATMs were installed in India. 
-2: SYSTEM SPECIFICATION:-
-2.1 Hardware Requirements:-
-•	Processor				-Core i5
-•	RAM					-2 GB
-•	Hard Disk				-40GB
-•	Mouse 				-Standard Mouse
-•	Keyboard 				-Logitech Keyboard
-•	Process Speed			-2.4GHz
-Software Requirement:
-MYSQL WORKBANCH
-INTELLIJ IDEA: -the IDE for Pro Java and Kotlin Development_JetBrain
+## Prerequisites
 
-Display Mode:-
-•	Color Quality		-Highest[64 bit]
-•	Screen Resolution	-1024 by 768 Pixels
+- Java Development Kit (JDK) 8 or higher
+- MySQL Server
+- MySQL Connector/J (JDBC driver)
+- JCalendar library for date handling
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/chandan2909/Atm-manage
+```
+
+2. Import the project into your preferred IDE
+
+3. Set up the MySQL database:
+   - Create a new database named `atm`
+   - Import the provided `atm_schema.sql` file using:
+     ```bash
+     mysql -u your_username -p atm < atm_schema.sql
+     ```
+   - This will create all necessary tables, indexes, and views
+   - Add the required security columns to the login table:
+     ```sql
+     ALTER TABLE login 
+     ADD COLUMN failed_attempts INT DEFAULT 0, 
+     ADD COLUMN is_locked INT DEFAULT 0, 
+     ADD COLUMN security_question VARCHAR(255), 
+     ADD COLUMN security_answer VARCHAR(255);
+     ```
+
+4. Configure database connection:
+   - Update the connection details in `src/Atm/management/Connn.java`
+
+5. Add required libraries to your project classpath:
+   - mysql-connector-java.jar
+   - jcalendar-1.4.jar
+
+## Database Schema
+
+The system uses three main tables:
+- `login` - Stores user credentials, card information, and security data
+- `bank` - Stores transaction records
+- `signup` - Stores user account details
+
+## Usage
+
+1. Run the application:
+```bash
+java -cp ".:lib/*" Atm.management.Login
+```
+
+2. For new users:
+   - Click "SIGN UP" to create a new account
+   - Fill in the required details including a security question and answer
+   - After registration, easily copy your card number and PIN using the Copy buttons
+   - Store these credentials securely for future login
+
+3. For existing users:
+   - Enter your card number and PIN
+   - Access various banking operations from the main menu
+
+4. If you forget your PIN:
+   - Click "RESET PIN" on the login screen
+   - Enter your card number
+   - Answer your security question correctly
+   - Choose a new PIN that meets security requirements
+
+## Security Features
+
+- Secure PIN handling:
+  - SHA-256 hashing with salt for PIN storage
+  - Strong PIN requirements (4-6 digits)
+  - Prevention of sequential digits (like 1234)
+  - Limits on repeating digits
+  
+- Account protection:
+  - Maximum login attempts with account lockout
+  - Security question verification for PIN reset
+  - Tracking of failed attempts
+  - Account locking after too many failed security verifications
+  
+- Data security:
+  - Input validation for all user data
+  - Proper error handling
+  - Secure database operations
+  - Protection against SQL injection
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Java Swing documentation
+- MySQL documentation
+- JCalendar library developers
